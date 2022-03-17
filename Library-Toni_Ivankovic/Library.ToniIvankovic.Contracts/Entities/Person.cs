@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Library.ToniIvankovic.Contracts.Entities
 {
-    internal class Person
+    public class Person
     {
         public int Id { get; set; }
         public string FirstName { get; set; }
