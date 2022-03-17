@@ -1,4 +1,4 @@
-namespace Library_Toni_Ivankovic
+namespace Library.ToniIvankovic.Api
 {
     public class WeatherForecast
     {
