@@ -28,6 +28,13 @@ app.UseHttpsRedirection();
 
 app.UseAuthorization();
 
+app.Use(async (context, next) =>
+{
+    var request = context.Request;
+    Console.WriteLine("Request User-Agent: " + request.Headers.UserAgent);
+    await next(context);
+});
+
 app.MapControllers();
 
 app.Run();
