@@ -11,10 +11,12 @@ namespace Library.ToniIvankovic.Services
 {
     public class PeopleService : IPeopleService
     {
-        private List<Person> _people;
+        private static List<Person> _people;
 
         public PeopleService()
         {
+            if (_people != null) return;
+
             _people = new List<Person>
             {
                 new Person(1, "Marko", "Markec", new Address("Ozaljska 23", "Zagreb", "Hrvatska")),
@@ -27,7 +29,10 @@ namespace Library.ToniIvankovic.Services
 
         public Person CreatePerson(PersonDTO dto)
         {
-            throw new NotImplementedException();
+            int newId = _people.Count + 1;
+            Person NewPerson = new(newId, dto.FirstName, dto.LastName, new Address(dto.Street, dto.City, dto.Country));
+            _people.Add(NewPerson);
+            return NewPerson;
         }
 
         public List<Person> GetAllPersons()
