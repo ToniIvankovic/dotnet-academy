@@ -8,17 +8,21 @@ namespace Library.ToniIvankovic.Contracts.Entities
 {
     public class Person
     {
-        public int Id { get; set; }
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
-        public Address Address { get; set; }
-
         public Person(int id, string firstName, string lastName, Address address)
         {
-            Id = id;
-            FirstName = firstName;
-            LastName = lastName;
-            Address = address;
+            this.Id = id;
+            this.FirstName = firstName;
+            this.LastName = lastName;
+            this.Address = address;
         }
+
+        public int Id { get; set; }
+
+        public string FirstName { get; set; }
+
+        public string LastName { get; set; }
+
+        public Address Address { get; set; }
+
     }
 }

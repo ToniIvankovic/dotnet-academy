@@ -11,8 +11,11 @@ namespace Library.ToniIvankovic.Contracts.Services
     public interface IPeopleService
     {
         List<Person> GetAllPersons();
-        Person GetPersonById(int id);
+
+        Person? GetPersonById(int id);
+
         Person CreatePerson(PersonDTO dto);
-        List<Person> GetAllPersonsByCity(string City);
+
+        List<Person> GetAllPersonsByCity(string city);
     }
 }

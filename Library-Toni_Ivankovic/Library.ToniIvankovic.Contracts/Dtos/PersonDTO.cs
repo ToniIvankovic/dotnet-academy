@@ -9,6 +9,14 @@ namespace Library.ToniIvankovic.Contracts.Dtos
 {
     public class PersonDTO
     {
+        public PersonDTO(string firstName, string lastName, string street, string city, string country)
+        {
+            this.FirstName = firstName;
+            this.LastName = lastName;
+            this.Street = street;
+            this.City = city;
+            this.Country = country;
+        }
 
         [Required(ErrorMessage = "First name is required")]
         [StringLength(100, MinimumLength = 2, ErrorMessage = "First name must be between 2 and 100 characters long")]
@@ -29,14 +37,5 @@ namespace Library.ToniIvankovic.Contracts.Dtos
         [Required(ErrorMessage ="Country name is required")]
         [StringLength(100, MinimumLength = 2, ErrorMessage = "Country name must be between 2 and 100 characters long")]
         public string Country { get; set; }
-
-        public PersonDTO(string firstName, string lastName, string street, string city, string country)
-        {
-            FirstName = firstName;
-            LastName = lastName;
-            Street = street;
-            City = city;
-            Country = country;
-        }
     }
 }
