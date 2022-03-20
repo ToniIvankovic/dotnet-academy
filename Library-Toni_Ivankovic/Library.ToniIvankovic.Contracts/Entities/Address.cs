@@ -2,12 +2,15 @@
 {
     public class Address
     {
-        public Address(string street, string city, string country)
+        public Address(int id, string street, string city, string country)
         {
+            Id = id;
             Street = street;
             City = city;
             Country = country;
         }
+
+        public int Id { get; set; }
 
         public string Street { get; set; }
 
