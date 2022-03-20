@@ -7,7 +7,7 @@ using Library.ToniIvankovic.Contracts.Entities;
 
 namespace Library.ToniIvankovic.Contracts.Repositories
 {
-    internal interface IUnitOfWork
+    public interface IUnitOfWork
     {
         IRepository<Person> People { get; }
 

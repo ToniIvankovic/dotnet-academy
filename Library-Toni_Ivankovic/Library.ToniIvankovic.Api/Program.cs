@@ -1,5 +1,7 @@
 using Library.ToniIvankovic.Contracts.Services;
+using Library.ToniIvankovic.Data.Db.Repositories;
 using Library.ToniIvankovic.Services;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,6 +12,7 @@ builder.Services.AddSwaggerGen();
 
 // Custom services
 builder.Services.AddScoped<IPeopleService, PeopleService>();
+builder.Services.AddScoped<DbContext, ApplicationDbContext>();
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();

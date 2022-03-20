@@ -13,7 +13,7 @@ namespace Library.ToniIvankovic.Contracts.Repositories
 
         Task<IEnumerable<TEntity>> GetAllAsync();
 
-        Task DeleteAsync(int id);
+        void DeleteAsync(int id);
 
         void Add(TEntity entity);
 
