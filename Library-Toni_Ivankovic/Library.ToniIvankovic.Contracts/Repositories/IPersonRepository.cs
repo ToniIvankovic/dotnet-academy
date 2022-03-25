@@ -9,6 +9,6 @@ namespace Library.ToniIvankovic.Contracts.Repositories
 {
     public interface IPersonRepository : IRepository<Person>
     {
-        List<Person> GetAllPersonsByCity(string city);
+        Task<List<Person>> GetAllPersonsByCity(string city);
     }
 }

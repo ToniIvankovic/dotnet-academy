@@ -14,8 +14,8 @@ namespace Library.ToniIvankovic.Contracts.Services
 
         Task<Person>? GetPersonByIdAsync(int id);
 
-        Person CreatePerson(PersonDTO dto);
+        Task<Person> CreatePerson(PersonDTO dto);
 
-        List<Person> GetAllPersonsByCity(string city);
+        Task<List<Person>> GetAllPersonsByCity(string city);
     }
 }

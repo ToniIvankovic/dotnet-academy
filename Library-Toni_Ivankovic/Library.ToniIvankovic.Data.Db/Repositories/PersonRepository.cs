@@ -15,9 +15,9 @@ namespace Library.ToniIvankovic.Data.Db.Repositories
         {
         }
 
-        public List<Person> GetAllPersonsByCity(string city)
+        public async Task<List<Person>> GetAllPersonsByCity(string city)
         {
-            return _dbSet.Where(p => p.Address.City == city).ToList();
+            return await _dbSet.Where(p => p.Address.City == city).ToListAsync();
         }
     }
 }

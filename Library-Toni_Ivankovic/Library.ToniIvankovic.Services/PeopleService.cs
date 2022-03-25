@@ -18,10 +18,11 @@ namespace Library.ToniIvankovic.Services
             this.unitOfWork = unitOfWork;
         }
 
-        public Person CreatePerson(PersonDTO dto)
+        public async Task<Person> CreatePerson(PersonDTO dto)
         {
             Person p = new Person(dto.FirstName, dto.LastName, new Address(dto.Street, dto.City, dto.Country));
             unitOfWork.People.Add(p);
+            await unitOfWork.SaveChangesAsync();
             return p;
         }
 
@@ -30,9 +31,9 @@ namespace Library.ToniIvankovic.Services
             return (await unitOfWork.People.GetAllAsync()).ToList();
         }
 
-        public List<Person> GetAllPersonsByCity(string City)
+        public async Task<List<Person>> GetAllPersonsByCity(string City)
         {
-            return unitOfWork.People.GetAllPersonsByCity(City);
+            return await unitOfWork.People.GetAllPersonsByCity(City);
         }
 
         public async Task<Person?> GetPersonByIdAsync(int id)
