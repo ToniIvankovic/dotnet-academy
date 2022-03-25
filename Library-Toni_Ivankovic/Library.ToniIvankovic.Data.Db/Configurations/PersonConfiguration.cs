@@ -34,7 +34,8 @@ namespace Library.ToniIvankovic.Data.Db.Configurations
             // konfiguracija odnosa
             builder
                 .HasOne(p => p.Address)
-                .WithMany();
+                .WithOne(a => a.Person)
+                .HasForeignKey<Address>(a => a.Id);
         }
     }
 }

@@ -37,6 +37,11 @@ namespace Library.ToniIvankovic.Data.Db.Configurations
                 .Property(a => a.Country)
                 .IsRequired()
                 .HasMaxLength(100);
+
+            builder
+                .HasOne(a => a.Person)
+                .WithOne(p => p.Address)
+                .HasForeignKey<Person>(p => p.Id);
         }
     }
 }

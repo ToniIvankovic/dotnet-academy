@@ -10,6 +10,10 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+builder.Services.AddDbContext<ApplicationDbContext>(opt =>
+{
+    opt.UseSqlServer(builder.Configuration.GetConnectionString("LibraryDB"), opt => opt.MigrationsAssembly("Library.ToniIvankovic.Data.Db"));
+});
 // Custom services
 builder.Services.AddScoped<IPeopleService, PeopleService>();
 builder.Services.AddScoped<DbContext, ApplicationDbContext>();

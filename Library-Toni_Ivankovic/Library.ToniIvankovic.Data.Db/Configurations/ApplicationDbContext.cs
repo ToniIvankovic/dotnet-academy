@@ -19,7 +19,6 @@ namespace Library.ToniIvankovic.Data.Db.Repositories
         // tablica u bazi
         public DbSet<Person> People { get; set; }
 
-        // TODO jel ovo može tu, ili u neki drugi file?
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());

@@ -1,4 +1,4 @@
-﻿namespace Library.ToniIvankovic.Contracts.Entities
+namespace Library.ToniIvankovic.Contracts.Entities
 {
     public class Address
     {
@@ -11,6 +11,8 @@
         }
 
         public int Id { get; set; }
+
+        public Person Person { get; set; }
 
         public string Street { get; set; }
 
