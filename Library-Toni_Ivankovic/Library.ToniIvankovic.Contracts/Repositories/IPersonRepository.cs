@@ -7,10 +7,8 @@ using Library.ToniIvankovic.Contracts.Entities;
 
 namespace Library.ToniIvankovic.Contracts.Repositories
 {
-    public interface IUnitOfWork
+    public interface IPersonRepository : IRepository<Person>
     {
-        IPersonRepository People { get; }
-
-        Task SaveChangesAsync();
+        List<Person> GetAllPersonsByCity(string city);
     }
 }

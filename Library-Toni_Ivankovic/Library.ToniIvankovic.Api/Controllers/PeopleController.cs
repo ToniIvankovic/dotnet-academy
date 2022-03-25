@@ -27,7 +27,7 @@ namespace Library.ToniIvankovic.Api.Controllrs
         [HttpGet("all")]
         public IActionResult GetPersonsAll()
         {
-            return Ok(peopleService.GetAllPersons());
+            return Ok(peopleService.GetAllPersonsAsync());
         }
 
         [HttpGet]
@@ -40,7 +40,7 @@ namespace Library.ToniIvankovic.Api.Controllrs
         [Route("{personId:int}")]
         public IActionResult GetPersonById([FromRoute] int personId)
         {
-            return Ok(peopleService.GetPersonById(personId));
+            return Ok(peopleService.GetPersonByIdAsync(personId));
         }
 
         [HttpPost]

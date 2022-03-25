@@ -18,6 +18,7 @@ namespace Library.ToniIvankovic.Data.Db.Repositories
 
         // tablica u bazi
         public DbSet<Person> People { get; set; }
+        public DbSet<Address> Address { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

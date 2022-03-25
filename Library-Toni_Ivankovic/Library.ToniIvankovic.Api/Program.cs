@@ -1,3 +1,4 @@
+using Library.ToniIvankovic.Contracts.Repositories;
 using Library.ToniIvankovic.Contracts.Services;
 using Library.ToniIvankovic.Data.Db.Repositories;
 using Library.ToniIvankovic.Services;
@@ -17,6 +18,7 @@ builder.Services.AddDbContext<ApplicationDbContext>(opt =>
 // Custom services
 builder.Services.AddScoped<IPeopleService, PeopleService>();
 builder.Services.AddScoped<DbContext, ApplicationDbContext>();
+builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();

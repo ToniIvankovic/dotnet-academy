@@ -46,7 +46,7 @@ namespace Library.ToniIvankovic.Data.Db.Migrations
 
                     b.HasAlternateKey("Street", "City", "Country");
 
-                    b.ToTable("Address");
+                    b.ToTable("Address", (string)null);
                 });
 
             modelBuilder.Entity("Library.ToniIvankovic.Contracts.Entities.Person", b =>
@@ -69,7 +69,7 @@ namespace Library.ToniIvankovic.Data.Db.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("People");
+                    b.ToTable("People", (string)null);
                 });
 
             modelBuilder.Entity("Library.ToniIvankovic.Contracts.Entities.Address", b =>
