@@ -20,7 +20,17 @@ namespace Library.ToniIvankovic.Services
 
         public async Task<Person> CreatePerson(PersonDTO dto)
         {
-            Person p = new Person(dto.FirstName, dto.LastName, new Address(dto.Street, dto.City, dto.Country));
+            Person p = new Person
+            {
+                FirstName = dto.FirstName,
+                LastName = dto.LastName,
+                Address = new Address
+                {
+                    Street = dto.Street,
+                    City = dto.City,
+                    Country = dto.Country,
+                },
+            };
             unitOfWork.People.Add(p);
             await unitOfWork.SaveChangesAsync();
             return p;

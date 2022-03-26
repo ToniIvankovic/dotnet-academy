@@ -1,4 +1,4 @@
-﻿using Library.ToniIvankovic.Contracts.Dtos;
+using Library.ToniIvankovic.Contracts.Dtos;
 using Library.ToniIvankovic.Contracts.Entities;
 using Library.ToniIvankovic.Contracts.Services;
 using Microsoft.AspNetCore.Http;
@@ -25,28 +25,28 @@ namespace Library.ToniIvankovic.Api.Controllrs
         }
 
         [HttpGet("all")]
-        public IActionResult GetPersonsAll()
+        public async Task<IActionResult> GetPersonsAllAsync()
         {
-            return Ok(peopleService.GetAllPersonsAsync());
+            return Ok(await peopleService.GetAllPersonsAsync());
         }
 
         [HttpGet]
-        public IActionResult GetPersonFromCity([FromQuery] string city)
+        public async Task<IActionResult> GetPersonFromCityAsync([FromQuery] string city)
         {
-            return Ok(peopleService.GetAllPersonsByCity(city));
+            return Ok(await peopleService.GetAllPersonsByCity(city));
         }
 
         [HttpGet]
         [Route("{personId:int}")]
-        public IActionResult GetPersonById([FromRoute] int personId)
+        public async Task<IActionResult> GetPersonByIdAsync([FromRoute] int personId)
         {
-            return Ok(peopleService.GetPersonByIdAsync(personId));
+            return Ok(await peopleService.GetPersonByIdAsync(personId));
         }
 
         [HttpPost]
-        public IActionResult CreatePerson([FromBody] PersonDTO personDTO)
+        public async Task<IActionResult> CreatePersonAsync([FromBody] PersonDTO personDTO)
         {
-            return Ok(peopleService.CreatePerson(personDTO));
+            return Ok(await peopleService.CreatePerson(personDTO));
         }
     }
 

@@ -12,7 +12,7 @@ namespace Library.ToniIvankovic.Contracts.Services
     {
         Task<List<Person>> GetAllPersonsAsync();
 
-        Task<Person>? GetPersonByIdAsync(int id);
+        Task<Person?> GetPersonByIdAsync(int id);
 
         Task<Person> CreatePerson(PersonDTO dto);
 

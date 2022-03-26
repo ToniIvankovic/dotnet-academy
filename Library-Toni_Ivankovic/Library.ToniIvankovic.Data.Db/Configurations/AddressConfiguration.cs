@@ -16,9 +16,9 @@ namespace Library.ToniIvankovic.Data.Db.Configurations
             builder
                 .HasKey(a => a.Id);
 
-            builder
-                .Property(a => a.Id)
-                .ValueGeneratedOnAdd();
+            //builder
+            //    .Property(a => a.Id)
+            //    .ValueGeneratedOnAdd();
 
             builder
                 .HasAlternateKey(a => new { a.Street, a.City, a.Country });
