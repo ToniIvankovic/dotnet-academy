@@ -1,9 +1,9 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.ComponentModel.DataAnnotations;
 
 namespace Library.ToniIvankovic.Contracts.Dtos
 {
@@ -34,7 +34,7 @@ namespace Library.ToniIvankovic.Contracts.Dtos
         [StringLength(100, MinimumLength = 2, ErrorMessage = "City name must be between 2 and 100 characters long")]
         public string City { get; set; }
 
-        [Required(ErrorMessage ="Country name is required")]
+        [Required(ErrorMessage = "Country name is required")]
         [StringLength(100, MinimumLength = 2, ErrorMessage = "Country name must be between 2 and 100 characters long")]
         public string Country { get; set; }
     }

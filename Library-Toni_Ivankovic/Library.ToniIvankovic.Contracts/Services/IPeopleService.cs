@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,12 +10,12 @@ namespace Library.ToniIvankovic.Contracts.Services
 {
     public interface IPeopleService
     {
-        List<Person> GetAllPersons();
+        Task<List<Person>> GetAllPersonsAsync();
 
-        Person? GetPersonById(int id);
+        Task<Person?> GetPersonByIdAsync(int id);
 
-        Person CreatePerson(PersonDTO dto);
+        Task<Person> CreatePerson(PersonDTO dto);
 
-        List<Person> GetAllPersonsByCity(string city);
+        Task<List<Person>> GetAllPersonsByCity(string city);
     }
 }
