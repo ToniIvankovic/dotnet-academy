@@ -1,3 +1,4 @@
+using Library.ToniIvankovic.Api;
 using Library.ToniIvankovic.Contracts.Repositories;
 using Library.ToniIvankovic.Contracts.Services;
 using Library.ToniIvankovic.Data.Db.Repositories;
@@ -11,10 +12,8 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddDbContext<ApplicationDbContext>(opt =>
-{
-    opt.UseSqlServer(builder.Configuration.GetConnectionString("LibraryDB"), opt => opt.MigrationsAssembly("Library.ToniIvankovic.Data.Db"));
-});
+IoC.ConfigureDependencies(builder.Services, builder.Configuration);
+
 // Custom services
 builder.Services.AddScoped<IPeopleService, PeopleService>();
 builder.Services.AddScoped<DbContext, ApplicationDbContext>();
