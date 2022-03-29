@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Library.ToniIvankovic.Contracts.Dtos;
 
 namespace Library.ToniIvankovic.Contracts.Entities
 {
@@ -37,6 +38,18 @@ namespace Library.ToniIvankovic.Contracts.Entities
         public void Return()
         {
             Quantity++;
+        }
+
+        public BookCatalogDTO ToCatalogDTO()
+        {
+            return new BookCatalogDTO
+            {
+                Authors = Authors,
+                Genre = Genre,
+                Quantity = Quantity,
+                Title = Title,
+                Id = Id,
+            };
         }
     }
 }
