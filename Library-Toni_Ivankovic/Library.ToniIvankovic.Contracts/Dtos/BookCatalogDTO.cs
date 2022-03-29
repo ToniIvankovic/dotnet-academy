@@ -9,7 +9,7 @@ namespace Library.ToniIvankovic.Contracts.Dtos
 {
     public class BookCatalogDTO
     {
-        public string Id { get; set; }
+        public int Id { get; set; }
         public string Title { get; set; }
         public string Authors { get; set; }
         public Genre Genre { get; set; }

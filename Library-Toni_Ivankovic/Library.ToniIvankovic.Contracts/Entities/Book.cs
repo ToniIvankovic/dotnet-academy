@@ -9,11 +9,12 @@ namespace Library.ToniIvankovic.Contracts.Entities
 {
     public class Book
     {
-        public string Id { get; }
+        public int Id { get; }
         public string Title { get; }
         public string Authors { get; }
         public Genre Genre { get; }
         public int Quantity { get; private set; }
+        public List<Person> PreviousOwners { get; }
 
         public Book(string title, string authors, Genre genre, int quantity)
         {
@@ -21,6 +22,7 @@ namespace Library.ToniIvankovic.Contracts.Entities
             Authors = authors;
             Genre = genre;
             Quantity = quantity;
+            PreviousOwners = new List<Person>();
         }
 
         public bool IsAvailable() => Quantity > 0;

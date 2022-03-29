@@ -51,8 +51,11 @@ namespace Library.ToniIvankovic.Data.Db.Migrations
 
             modelBuilder.Entity("Library.ToniIvankovic.Contracts.Entities.Book", b =>
                 {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<string>("Authors")
                         .IsRequired()
@@ -286,6 +289,21 @@ namespace Library.ToniIvankovic.Data.Db.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("PersonBook", b =>
+                {
+                    b.Property<int>("BookId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("PersonId")
+                        .HasColumnType("int");
+
+                    b.HasKey("BookId", "PersonId");
+
+                    b.HasIndex("PersonId");
+
+                    b.ToTable("PersonBook");
+                });
+
             modelBuilder.Entity("Library.ToniIvankovic.Contracts.Entities.Address", b =>
                 {
                     b.HasOne("Library.ToniIvankovic.Contracts.Entities.Person", "Person")
@@ -344,6 +362,21 @@ namespace Library.ToniIvankovic.Data.Db.Migrations
                     b.HasOne("Library.ToniIvankovic.Contracts.Entities.Person", null)
                         .WithMany()
                         .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("PersonBook", b =>
+                {
+                    b.HasOne("Library.ToniIvankovic.Contracts.Entities.Book", null)
+                        .WithMany()
+                        .HasForeignKey("BookId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Library.ToniIvankovic.Contracts.Entities.Person", null)
+                        .WithMany()
+                        .HasForeignKey("PersonId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

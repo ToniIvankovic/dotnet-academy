@@ -38,29 +38,36 @@ namespace Library.ToniIvankovic.Services
             return _uow.Books.GetByIdAsync(id);
         }
 
-        public async Task RentBookAsync(int id)
+        public async Task RentBookAsync(int personId, int bookId)
         {
-            var book = await _uow.Books.GetByIdAsync(id);
+            var book = await _uow.Books.GetByIdAsync(bookId);
             if (book == null)
             {
-                throw new ArgumentException($"Unknown book with id {id}!");
+                throw new ArgumentException($"Unknown book with id {bookId}!");
             }
 
-            book.Rent();
-            _uow.Books.Update(book);
+            var person = await _uow.People.GetByIdAsync(personId);
+            if (person == null)
+            {
+                throw new ArgumentException($"Unknown person with id {bookId}!");
+            }
+
+            person.RentBook(book);
+            // _uow.Books.Update(book);     // ZAŠ NE TREBA UPDATE?
             await _uow.SaveChangesAsync();
         }
 
-        public async Task ReturnBookAsync(int id)
+        public async Task ReturnBookAsync(int personId, int bookId)
         {
-            var book = await _uow.Books.GetByIdAsync(id);
-            if (book == null)
+
+            var person = await _uow.People.GetByIdAsync(personId);
+            if (person == null)
             {
-                throw new ArgumentException($"Unknown book with id {id}!");
+                throw new ArgumentException($"Unknown person with id {bookId}!");
             }
 
-            book.Return();
-            _uow.Books.Update(book);
+            person.ReturnBook(bookId);
+            // _uow.Books.Update(book);
             await _uow.SaveChangesAsync();
         }
     }

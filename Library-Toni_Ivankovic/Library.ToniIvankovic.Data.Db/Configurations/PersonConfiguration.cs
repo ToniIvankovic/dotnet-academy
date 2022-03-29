@@ -36,6 +36,13 @@ namespace Library.ToniIvankovic.Data.Db.Configurations
                 .HasOne(p => p.Address)
                 .WithOne(a => a.Person)
                 .HasForeignKey<Address>(a => a.Id);
+            builder.
+                HasMany(p => p.RentedBooks)
+                .WithMany(b => b.PreviousOwners)
+                .UsingEntity<Dictionary<string, object>>(
+                "PersonBook",
+                b => b.HasOne<Book>().WithMany().HasForeignKey("BookId"),
+                b => b.HasOne<Person>().WithMany().HasForeignKey("PersonId"));
         }
     }
 }

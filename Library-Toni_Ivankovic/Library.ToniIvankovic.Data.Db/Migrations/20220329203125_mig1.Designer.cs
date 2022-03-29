@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Library.ToniIvankovic.Data.Db.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220327114049_mig2")]
-    partial class mig2
+    [Migration("20220329203125_mig1")]
+    partial class mig1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -49,6 +49,35 @@ namespace Library.ToniIvankovic.Data.Db.Migrations
                     b.HasAlternateKey("Street", "City", "Country");
 
                     b.ToTable("Address");
+                });
+
+            modelBuilder.Entity("Library.ToniIvankovic.Contracts.Entities.Book", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("Authors")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
+
+                    b.Property<int>("Genre")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Quantity")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Book");
                 });
 
             modelBuilder.Entity("Library.ToniIvankovic.Contracts.Entities.Person", b =>
@@ -262,6 +291,21 @@ namespace Library.ToniIvankovic.Data.Db.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("PersonBook", b =>
+                {
+                    b.Property<int>("BookId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("PersonId")
+                        .HasColumnType("int");
+
+                    b.HasKey("BookId", "PersonId");
+
+                    b.HasIndex("PersonId");
+
+                    b.ToTable("PersonBook");
+                });
+
             modelBuilder.Entity("Library.ToniIvankovic.Contracts.Entities.Address", b =>
                 {
                     b.HasOne("Library.ToniIvankovic.Contracts.Entities.Person", "Person")
@@ -320,6 +364,21 @@ namespace Library.ToniIvankovic.Data.Db.Migrations
                     b.HasOne("Library.ToniIvankovic.Contracts.Entities.Person", null)
                         .WithMany()
                         .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("PersonBook", b =>
+                {
+                    b.HasOne("Library.ToniIvankovic.Contracts.Entities.Book", null)
+                        .WithMany()
+                        .HasForeignKey("BookId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Library.ToniIvankovic.Contracts.Entities.Person", null)
+                        .WithMany()
+                        .HasForeignKey("PersonId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
