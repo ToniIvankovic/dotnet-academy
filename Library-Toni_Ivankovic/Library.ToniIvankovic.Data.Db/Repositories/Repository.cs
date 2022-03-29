@@ -19,9 +19,9 @@ namespace Library.ToniIvankovic.Data.Db.Repositories
             _dbSet = dbContext.Set<TEntity>();
         }
 
-        public void Add(TEntity entity)
+        public async void AddAsync(TEntity entity)
         {
-            _dbSet.Add(entity);
+            await _dbSet.AddAsync(entity);
         }
 
         public async void DeleteAsync(int id)

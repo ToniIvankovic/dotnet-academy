@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,7 +15,7 @@ namespace Library.ToniIvankovic.Contracts.Repositories
 
         void DeleteAsync(int id);
 
-        void Add(TEntity entity);
+        void AddAsync(TEntity entity);
 
         void Update(TEntity entity);
     }

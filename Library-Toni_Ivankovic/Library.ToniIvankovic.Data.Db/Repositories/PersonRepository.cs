@@ -17,17 +17,24 @@ namespace Library.ToniIvankovic.Data.Db.Repositories
 
         public override async Task<IEnumerable<Person>> GetAllAsync()
         {
-            return await _dbSet.Include(p => p.Address).ToListAsync();
+            return await _dbSet
+                .Include(p => p.Address)
+                .ToListAsync();
         }
 
         public override async Task<Person?> GetByIdAsync(int id)
         {
-            return await _dbSet.Include(p => p.Address).FirstOrDefaultAsync(p => p.Id == id);
+            return await _dbSet
+                .Include(p => p.Address)
+                .FirstOrDefaultAsync(p => p.Id == id);
         }
 
         public async Task<List<Person>> GetAllPersonsByCity(string city)
         {
-            return await _dbSet.Where(p => p.Address.City == city).Include(p => p.Address).ToListAsync();
+            return await _dbSet
+                .Where(p => p.Address.City == city)
+                .Include(p => p.Address)
+                .ToListAsync();
         }
     }
 }

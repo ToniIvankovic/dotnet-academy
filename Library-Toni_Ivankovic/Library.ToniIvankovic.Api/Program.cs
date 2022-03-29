@@ -17,6 +17,7 @@ IoC.ConfigureDependencies(builder.Services, builder.Configuration);
 // Custom services
 builder.Services.AddScoped<IPeopleService, PeopleService>();
 builder.Services.AddScoped<DbContext, ApplicationDbContext>();
+builder.Services.AddScoped<IRegistrationService, RegistrationService>();
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

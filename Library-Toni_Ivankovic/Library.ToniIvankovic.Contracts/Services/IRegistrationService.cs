@@ -8,14 +8,9 @@ using Library.ToniIvankovic.Contracts.Entities;
 
 namespace Library.ToniIvankovic.Contracts.Services
 {
-    public interface IPeopleService
+    public interface IRegistrationService
     {
-        Task<List<Person>> GetAllPersonsAsync();
-
-        Task<Person?> GetPersonByIdAsync(int id);
-
-        Task<Person> CreatePersonAsync(PersonDTO dto);
-
-        Task<List<Person>> GetAllPersonsByCity(string city);
+        public Task<Person> RegisterPersonAsync(RegisterDTO person);
+        public Task<Person> LoginPersonAsync(LoginDTO loginData);
     }
 }
