@@ -25,6 +25,8 @@ namespace Library.ToniIvankovic.Data.Db.Configurations
 
             builder.Property(b => b.Genre)
                 .IsRequired();
+
+            builder.HasData(BookMocks.Books);
         }
     }
 }

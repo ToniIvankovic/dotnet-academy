@@ -38,7 +38,7 @@ namespace Library.ToniIvankovic.Data.Db.Configurations
                 .HasForeignKey<Address>(a => a.Id);
             builder.
                 HasMany(p => p.RentedBooks)
-                .WithMany(b => b.PreviousOwners)
+                .WithMany(b => b.CurrentlyRentedBy)
                 .UsingEntity<Dictionary<string, object>>(
                 "PersonBook",
                 b => b.HasOne<Book>().WithMany().HasForeignKey("BookId"),

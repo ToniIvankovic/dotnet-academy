@@ -14,15 +14,16 @@ namespace Library.ToniIvankovic.Contracts.Entities
         public string Authors { get; }
         public Genre Genre { get; }
         public int Quantity { get; private set; }
-        public List<Person> PreviousOwners { get; }
+        public List<Person> CurrentlyRentedBy { get; }
 
-        public Book(string title, string authors, Genre genre, int quantity)
+        public Book(int id, string title, string authors, Genre genre, int quantity)
         {
+            Id = id;
             Title = title;
             Authors = authors;
             Genre = genre;
             Quantity = quantity;
-            PreviousOwners = new List<Person>();
+            CurrentlyRentedBy = new List<Person>();
         }
 
         public bool IsAvailable() => Quantity > 0;

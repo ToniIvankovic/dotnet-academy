@@ -9,11 +9,16 @@ namespace Library.ToniIvankovic.Contracts.Entities
 {
     public class Person : IdentityUser<int>
     {
-        public int Id { get; }
+        public override int Id { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public Address Address { get; set; }
         public List<Book> RentedBooks { get; set; }
+
+        public Person()
+        {
+            RentedBooks = new List<Book>();
+        }
 
         public void RentBook(Book book)
         {

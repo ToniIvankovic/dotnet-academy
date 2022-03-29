@@ -12,5 +12,7 @@ namespace Library.ToniIvankovic.Contracts.Entities
         NON_FICTION,
         SCI_FI,
         MYTHOLOGY,
+        DYSTOPIA,
+        ROMANCE_NOVEL
     }
 }

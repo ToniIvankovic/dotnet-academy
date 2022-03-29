@@ -14,6 +14,6 @@ namespace Library.ToniIvankovic.Contracts.Services
         Task<Book> GetBookByIdAsync(int id);
         Task RentBookAsync(int personId, int bookId);
         Task ReturnBookAsync(int personId, int bookId);
-        Task<List<Book>> GetAllReturnedBooks(int personId);
+        Task<List<Book>> GetAllRentedBooks(int personId);
     }
 }
