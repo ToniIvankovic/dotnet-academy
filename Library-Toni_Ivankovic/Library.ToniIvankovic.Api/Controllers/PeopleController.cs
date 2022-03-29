@@ -1,7 +1,6 @@
 using Library.ToniIvankovic.Contracts.Dtos;
-using Library.ToniIvankovic.Contracts.Entities;
 using Library.ToniIvankovic.Contracts.Services;
-using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Library.ToniIvankovic.Api.Controllers
@@ -25,6 +24,7 @@ namespace Library.ToniIvankovic.Api.Controllers
         }
 
         [HttpGet("all")]
+        [Authorize]
         public async Task<IActionResult> GetPersonsAllAsync()
         {
             return Ok(await peopleService.GetAllPersonsAsync());

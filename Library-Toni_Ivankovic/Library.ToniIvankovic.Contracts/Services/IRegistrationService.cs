@@ -11,6 +11,6 @@ namespace Library.ToniIvankovic.Contracts.Services
     public interface IRegistrationService
     {
         public Task<Person> RegisterPersonAsync(RegisterDTO person);
-        public Task<Person> LoginPersonAsync(LoginDTO loginData);
+        public Task<TokenDTO> LoginPersonAsync(LoginDTO loginData);
     }
 }

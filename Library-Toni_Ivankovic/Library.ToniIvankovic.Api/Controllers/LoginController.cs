@@ -1,7 +1,5 @@
 using Library.ToniIvankovic.Contracts.Dtos;
-using Library.ToniIvankovic.Contracts.Entities;
 using Library.ToniIvankovic.Contracts.Services;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Library.ToniIvankovic.Api.Controllers

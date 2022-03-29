@@ -33,6 +33,7 @@ namespace Library.ToniIvankovic.Services
                     authSigningKey,
                     SecurityAlgorithms.HmacSha256)
                 );
+            Console.WriteLine(jwtToken);
             var token = new JwtSecurityTokenHandler().WriteToken(jwtToken);
             return new TokenDTO
             {

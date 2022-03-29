@@ -1,7 +1,11 @@
+using System.Text;
+using Library.ToniIvankovic.Contracts.Dtos;
 using Library.ToniIvankovic.Contracts.Entities;
 using Library.ToniIvankovic.Data.Db.Repositories;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 
 namespace Library.ToniIvankovic.Api
 {
@@ -15,6 +19,7 @@ namespace Library.ToniIvankovic.Api
             {
                 opt.UseSqlServer(configuration.GetConnectionString("LibraryDB"), opt => opt.MigrationsAssembly("Library.ToniIvankovic.Data.Db"));
             });
+
             services
                 .AddIdentity<Person, IdentityRole<int>>(options =>
                 {
@@ -22,6 +27,29 @@ namespace Library.ToniIvankovic.Api
                     options.Password.RequireDigit = true;
                 })
                 .AddEntityFrameworkStores<ApplicationDbContext>();
+
+            services
+                .AddAuthentication(options =>
+                {
+                    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+                    options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+                })
+                .AddJwtBearer(options =>
+                {
+                    options.SaveToken = true;
+                    options.RequireHttpsMetadata = false;
+                    options.TokenValidationParameters = new TokenValidationParameters()
+                    {
+                        ValidateIssuer = true,
+                        ValidateAudience = true,
+                        ValidAudience = configuration["JWT:Audience"],
+                        ValidIssuer = configuration["JWT:Issuer"],
+                        IssuerSigningKey = new SymmetricSecurityKey(
+                            Encoding.UTF8.GetBytes(configuration["JWT:Key"])),
+                    };
+                });
+            services.Configure<JWTSettings>(configuration.GetSection("JWT"));
         }
     }
 }
