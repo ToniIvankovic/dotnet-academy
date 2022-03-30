@@ -23,7 +23,7 @@ namespace Library.ToniIvankovic.Contracts.Entities
         public void RentBook(Book book)
         {
             const int maxBooksRented = 4;
-            if (RentedBooks.Count > maxBooksRented)
+            if (RentedBooks.Count + 1 > maxBooksRented)
             {
                 throw new Exception("Maximum number of books already rented!");
             }

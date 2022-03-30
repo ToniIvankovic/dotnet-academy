@@ -26,7 +26,7 @@ namespace Library.ToniIvankovic.Services
             return books.Select(book => book.ToCatalogDTO()).ToList();
         }
 
-        public async Task<List<Book>> GetAllRentedBooks(int personId)
+        public async Task<List<BookCatalogDTO>> GetAllRentedBooks(int personId)
         {
             var person = await _uow.People.GetByIdAsync(personId);
             if (person == null)
@@ -34,12 +34,18 @@ namespace Library.ToniIvankovic.Services
                 throw new ArgumentException($"Unknown person with id {personId}!");
             }
 
-            return person.RentedBooks;
+            return person.RentedBooks.Select(b => b.ToCatalogDTO()).ToList();
         }
 
-        public Task<Book?> GetBookByIdAsync(int id)
+        public async Task<BookCatalogDTO?> GetBookByIdAsync(int id)
         {
-            return _uow.Books.GetByIdAsync(id);
+            var book = await _uow.Books.GetByIdAsync(id);
+            if (book == null)
+            {
+                return null;
+            }
+
+            return book.ToCatalogDTO();
         }
 
         public async Task RentBookAsync(int personId, int bookId)
