@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Library.ToniIvankovic.Contracts.Dtos;
 using Library.ToniIvankovic.Contracts.Entities;
+using Library.ToniIvankovic.Contracts.Exceptions;
 using Library.ToniIvankovic.Contracts.Repositories;
 using Library.ToniIvankovic.Contracts.Services;
 using Library.ToniIvankovic.Data.Db.Repositories;
@@ -31,7 +32,7 @@ namespace Library.ToniIvankovic.Services
             var person = await _uow.People.GetByIdAsync(personId);
             if (person == null)
             {
-                throw new ArgumentException($"Unknown person with id {personId}!");
+                throw new EntityNotFoundException($"Unknown person with id {personId}!");
             }
 
             return person.RentedBooks.Select(b => b.ToCatalogDTO()).ToList();
@@ -53,13 +54,13 @@ namespace Library.ToniIvankovic.Services
             var book = await _uow.Books.GetByIdAsync(bookId);
             if (book == null)
             {
-                throw new ArgumentException($"Unknown book with id {bookId}!");
+                throw new EntityNotFoundException($"Unknown book with id {bookId}!");
             }
 
             var person = await _uow.People.GetByIdAsync(personId);
             if (person == null)
             {
-                throw new ArgumentException($"Unknown person with id {personId}!");
+                throw new EntityNotFoundException($"Unknown person with id {personId}!");
             }
 
             person.RentBook(book);
@@ -73,7 +74,7 @@ namespace Library.ToniIvankovic.Services
             var person = await _uow.People.GetByIdAsync(personId);
             if (person == null)
             {
-                throw new ArgumentException($"Unknown person with id {personId}!");
+                throw new EntityNotFoundException($"Unknown person with id {personId}!");
             }
 
             person.ReturnBook(bookId);

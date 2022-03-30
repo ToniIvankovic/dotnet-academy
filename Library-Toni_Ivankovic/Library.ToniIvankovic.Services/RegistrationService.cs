@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Library.ToniIvankovic.Contracts.Dtos;
 using Library.ToniIvankovic.Contracts.Entities;
+using Library.ToniIvankovic.Contracts.Exceptions;
 using Library.ToniIvankovic.Contracts.Services;
 using Microsoft.AspNetCore.Identity;
 
@@ -27,13 +28,13 @@ namespace Library.ToniIvankovic.Services
             var user = await _userManager.FindByEmailAsync(loginData.Email);
             if (user == null)
             {
-                throw new Exception("User non-existent!");
+                throw new EntityNotFoundException("User non-existent!");
             }
 
             bool validPassword = await _userManager.CheckPasswordAsync(user, loginData.Password);
             if (!validPassword)
             {
-                throw new Exception("Invalid password!");
+                throw new UserAuthenticationException("Invalid password!");
             }
 
             var claims = new List<Claim>
@@ -51,7 +52,7 @@ namespace Library.ToniIvankovic.Services
             var existing = await _userManager.FindByEmailAsync(person.Email);
             if (existing != null)
             {
-                throw new Exception("User already exists!");
+                throw new EntityAlreadyExistsException("User already exists!");
             }
 
             Person newPerson = new Person()
@@ -71,8 +72,8 @@ namespace Library.ToniIvankovic.Services
 
             if (!result.Succeeded)
             {
-                throw new Exception(
-                    string.Join(",", result.Errors.SelectMany(x => x.Description))
+                throw new InvalidFieldsException(
+                    string.Join(",", result.Errors.SelectMany(x => x.Description).ToList())
                     );
             }
 

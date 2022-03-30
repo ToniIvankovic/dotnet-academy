@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Library.ToniIvankovic.Contracts.Dtos;
+using Library.ToniIvankovic.Contracts.Exceptions;
 
 namespace Library.ToniIvankovic.Contracts.Entities
 {
@@ -31,7 +32,7 @@ namespace Library.ToniIvankovic.Contracts.Entities
         {
             if (!IsAvailable())
             {
-                throw new ArgumentException("No more of this book left in storage!");
+                throw new BookNotAvailableException("No more of this book left in storage!");
             }
             else
             {

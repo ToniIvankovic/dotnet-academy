@@ -39,6 +39,7 @@ app.UseHttpsRedirection();
 
 app.UseAuthentication();
 app.UseAuthorization();
+app.UseMiddleware<ExceptionHandlerMiddleware>();
 
 app.Use(async (context, next) =>
 {

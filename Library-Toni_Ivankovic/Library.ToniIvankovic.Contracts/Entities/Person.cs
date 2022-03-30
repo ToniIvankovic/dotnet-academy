@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Library.ToniIvankovic.Contracts.Exceptions;
 using Microsoft.AspNetCore.Identity;
 
 namespace Library.ToniIvankovic.Contracts.Entities
@@ -25,11 +26,11 @@ namespace Library.ToniIvankovic.Contracts.Entities
             const int maxBooksRented = 4;
             if (RentedBooks.Count + 1 > maxBooksRented)
             {
-                throw new Exception("Maximum number of books already rented!");
+                throw new BookRentingException("Maximum number of books already rented!");
             }
             if (RentedBooks.Contains(book))
             {
-                throw new Exception("Cannot rent the same book twice at the same time");
+                throw new BookRentingException("Cannot rent the same book twice at the same time");
             }
             else
             {
@@ -43,7 +44,7 @@ namespace Library.ToniIvankovic.Contracts.Entities
             var book = RentedBooks.Find(b => b.Id == bookId);
             if (book == null)
             {
-                throw new Exception($"The book with the id {bookId} has not even been borrowed!");
+                throw new BookRentingException($"The book with the id {bookId} has not even been borrowed!");
             }
 
             RentedBooks.Remove(book);
