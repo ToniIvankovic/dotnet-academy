@@ -23,6 +23,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Library.ToniIvankovic.Contracts\Library.ToniIvankovic.Contracts.csproj" />
+    <ProjectReference Include="..\Library.ToniIvankovic.Data.Db\Library.ToniIvankovic.Data.Db.csproj" />
   </ItemGroup>
 
 </Project>
