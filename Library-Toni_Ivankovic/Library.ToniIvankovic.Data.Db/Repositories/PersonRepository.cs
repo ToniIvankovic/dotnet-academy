@@ -19,6 +19,7 @@ namespace Library.ToniIvankovic.Data.Db.Repositories
         {
             return await _dbSet
                 .Include(p => p.Address)
+                .Include(p => p.RentedBooks)
                 .ToListAsync();
         }
 
@@ -26,6 +27,7 @@ namespace Library.ToniIvankovic.Data.Db.Repositories
         {
             return await _dbSet
                 .Include(p => p.Address)
+                .Include(p => p.RentedBooks)
                 .FirstOrDefaultAsync(p => p.Id == id);
         }
 
@@ -34,6 +36,7 @@ namespace Library.ToniIvankovic.Data.Db.Repositories
             return await _dbSet
                 .Where(p => p.Address.City == city)
                 .Include(p => p.Address)
+                .Include(p => p.RentedBooks)
                 .ToListAsync();
         }
     }

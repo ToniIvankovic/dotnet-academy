@@ -10,6 +10,7 @@ namespace Library.ToniIvankovic.Contracts.Repositories
     public interface IUnitOfWork
     {
         IPersonRepository People { get; }
+        IRepository<Book> Books { get; }
 
         Task SaveChangesAsync();
     }
