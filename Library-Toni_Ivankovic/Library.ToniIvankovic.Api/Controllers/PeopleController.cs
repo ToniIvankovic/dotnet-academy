@@ -1,10 +1,9 @@
 using Library.ToniIvankovic.Contracts.Dtos;
-using Library.ToniIvankovic.Contracts.Entities;
 using Library.ToniIvankovic.Contracts.Services;
-using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Library.ToniIvankovic.Api.Controllrs
+namespace Library.ToniIvankovic.Api.Controllers
 {
     /// <summary>
     /// The controller for requests on people.
@@ -25,6 +24,7 @@ namespace Library.ToniIvankovic.Api.Controllrs
         }
 
         [HttpGet("all")]
+        [Authorize]
         public async Task<IActionResult> GetPersonsAllAsync()
         {
             return Ok(await peopleService.GetAllPersonsAsync());
@@ -46,8 +46,7 @@ namespace Library.ToniIvankovic.Api.Controllrs
         [HttpPost]
         public async Task<IActionResult> CreatePersonAsync([FromBody] PersonDTO personDTO)
         {
-            return Ok(await peopleService.CreatePerson(personDTO));
+            return Ok(await peopleService.CreatePersonAsync(personDTO));
         }
     }
-
 }

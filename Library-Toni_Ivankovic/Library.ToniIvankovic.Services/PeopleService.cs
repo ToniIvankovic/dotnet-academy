@@ -18,7 +18,7 @@ namespace Library.ToniIvankovic.Services
             this.unitOfWork = unitOfWork;
         }
 
-        public async Task<Person> CreatePerson(PersonDTO dto)
+        public async Task<Person> CreatePersonAsync(PersonDTO dto)
         {
             Person p = new Person
             {
@@ -31,7 +31,7 @@ namespace Library.ToniIvankovic.Services
                     Country = dto.Country,
                 },
             };
-            unitOfWork.People.Add(p);
+            unitOfWork.People.AddAsync(p);
             await unitOfWork.SaveChangesAsync();
             return p;
         }
