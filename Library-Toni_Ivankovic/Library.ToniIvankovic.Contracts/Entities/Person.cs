@@ -28,6 +28,7 @@ namespace Library.ToniIvankovic.Contracts.Entities
             {
                 throw new BookRentingException("Maximum number of books already rented!");
             }
+
             if (RentedBooks.Contains(book))
             {
                 throw new BookRentingException("Cannot rent the same book twice at the same time");
@@ -36,6 +37,7 @@ namespace Library.ToniIvankovic.Contracts.Entities
             {
                 RentedBooks.Add(book);
                 book.Rent();
+                book.CurrentlyRentedBy.Add(this);
             }
         }
 
@@ -49,6 +51,7 @@ namespace Library.ToniIvankovic.Contracts.Entities
 
             RentedBooks.Remove(book);
             book.Return();
+            book.CurrentlyRentedBy.Remove(this);
         }
     }
 }

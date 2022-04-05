@@ -7,12 +7,12 @@ namespace Library.ToniIvankovic.Contracts.Tests
 {
     public class PersonTests
     {
-        private Person _sut;
         private readonly Book _book;
+        private Person person;
 
         public PersonTests()
         {
-            _sut = new Person();
+            person = new Person();
             _book = new Book(1, "Bla", "Author1, Author2", Genre.FANTASY, 1);
         }
 
@@ -20,7 +20,7 @@ namespace Library.ToniIvankovic.Contracts.Tests
         public void RentBook_WhenBookNotAvailable_ThenThrowException()
         {
             new Person().RentBook(_book);
-            Assert.Throws<BookNotAvailableException>(() => _sut.RentBook(_book));
+            Assert.Throws<BookNotAvailableException>(() => person.RentBook(_book));
         }
 
         [Fact]
@@ -35,44 +35,59 @@ namespace Library.ToniIvankovic.Contracts.Tests
         public void RentBook_WhenTooManyRented_ThenThrowException()
         {
             IEnumerable<Book> books = BookMocks.Books;
-            books.Where(b => b.Id <= 4).ToList().ForEach(book => _sut.RentBook(book));
-            Assert.Throws<BookRentingException>(() => _sut.RentBook(books.Where(b => b.Id == 5).FirstOrDefault(_book)));
+            books.Where(b => b.Id <= 4).ToList().ForEach(book => person.RentBook(book));
+            Assert.Throws<BookRentingException>(() => person.RentBook(books.Where(b => b.Id == 5).FirstOrDefault(_book)));
         }
 
         [Fact]
         public void RentBook_WhenAlreadyRented_ThenThrowException()
         {
-            _sut.RentBook(_book);
-            Assert.Throws<BookRentingException>(() => _sut.RentBook(_book));
+            person.RentBook(_book);
+            Assert.Throws<BookRentingException>(() => person.RentBook(_book));
         }
 
         [Fact]
         public void ReturnBook_WhenNotRented_ThenThrowException()
         {
-            Assert.Throws<BookRentingException>(() => _sut.ReturnBook(_book.Id));
+            Assert.Throws<BookRentingException>(() => person.ReturnBook(_book.Id));
         }
 
         [Fact]
         public void ReturnBook_WhenRented_ThenIncreaseQuantity()
         {
-            _sut.RentBook(_book);
-            _sut.ReturnBook(_book.Id);
+            person.RentBook(_book);
+            person.ReturnBook(_book.Id);
             Assert.Equal(1, _book.Quantity);
         }
 
         [Fact]
         public void RentBook_WhenNotRented_ThenPutIntoList()
         {
-            _sut.RentBook(_book);
-            Assert.Contains(_book, _sut.RentedBooks);
+            person.RentBook(_book);
+            Assert.Contains(_book, person.RentedBooks);
         }
 
         [Fact]
         public void ReturnBook_WhenRented_ThenRemoveFromList()
         {
-            _sut.RentBook(_book);
-            _sut.ReturnBook(_book.Id);
-            Assert.DoesNotContain(_book, _sut.RentedBooks);
+            person.RentBook(_book);
+            person.ReturnBook(_book.Id);
+            Assert.DoesNotContain(_book, person.RentedBooks);
+        }
+
+        [Fact]
+        public void RentBook_WhenNotRented_ThenAddBookToRentedList()
+        {
+            person.RentBook(_book);
+            Assert.Contains(_book, person.RentedBooks);
+        }
+
+        [Fact]
+        public void Return_WhenRented_ThenRemovePersonFromRentedList()
+        {
+            person.RentBook(_book);
+            person.ReturnBook(_book.Id);
+            Assert.DoesNotContain(_book, person.RentedBooks);
         }
     }
 }
