@@ -51,6 +51,7 @@ namespace Library.ToniIvankovic.Api
                     };
                 });
             services.Configure<JWTSettings>(configuration.GetSection("JWT"));
+            services.Configure<EmailSettings>(configuration.GetSection("SendGrid"));
 
             services.AddSwaggerGen(c =>
             {
