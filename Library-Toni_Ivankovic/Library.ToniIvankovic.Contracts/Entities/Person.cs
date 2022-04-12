@@ -14,11 +14,11 @@ namespace Library.ToniIvankovic.Contracts.Entities
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public Address Address { get; set; }
-        public List<Book> RentedBooks { get; set; }
+        public List<RentingInstance> RentedBooks { get; set; }
 
         public Person()
         {
-            RentedBooks = new List<Book>();
+            RentedBooks = new List<RentingInstance>();
         }
 
         public void RentBook(Book book)
@@ -29,13 +29,13 @@ namespace Library.ToniIvankovic.Contracts.Entities
                 throw new BookRentingException("Maximum number of books already rented!");
             }
 
-            if (RentedBooks.Contains(book))
+            if (RentedBooks.Select(r => r.Book).Contains(book))
             {
                 throw new BookRentingException("Cannot rent the same book twice at the same time");
             }
             else
             {
-                RentedBooks.Add(book);
+                RentedBooks.Add(new RentingInstance(this, book));
                 book.Rent();
                 book.CurrentlyRentedBy.Add(this);
             }
@@ -43,13 +43,13 @@ namespace Library.ToniIvankovic.Contracts.Entities
 
         public void ReturnBook(int bookId)
         {
-            var book = RentedBooks.Find(b => b.Id == bookId);
+            var book = RentedBooks.Select(r => r.Book).ToList().Find(b => b.Id == bookId);
             if (book == null)
             {
                 throw new BookRentingException($"The book with the id {bookId} has not even been borrowed!");
             }
 
-            RentedBooks.Remove(book);
+            RentedBooks.Remove(RentedBooks.Find(r => r.Book == book));
             book.Return();
             book.CurrentlyRentedBy.Remove(this);
         }

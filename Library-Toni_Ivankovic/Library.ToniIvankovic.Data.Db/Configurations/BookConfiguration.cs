@@ -27,6 +27,10 @@ namespace Library.ToniIvankovic.Data.Db.Configurations
                 .IsRequired();
 
             builder.HasData(BookMocks.Books);
+
+            builder
+                .HasMany<RentingInstance>()
+                .WithOne(r => r.Book);
         }
     }
 }
