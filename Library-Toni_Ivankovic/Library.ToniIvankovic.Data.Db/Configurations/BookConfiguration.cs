@@ -29,7 +29,7 @@ namespace Library.ToniIvankovic.Data.Db.Configurations
             builder.HasData(BookMocks.Books);
 
             builder
-                .HasMany<RentingInstance>()
+                .HasMany<RentingInstance>(b => b.CurrentlyRentedBy)
                 .WithOne(r => r.Book);
         }
     }

@@ -35,9 +35,10 @@ namespace Library.ToniIvankovic.Contracts.Entities
             }
             else
             {
-                RentedBooks.Add(new RentingInstance(this, book));
+                var renting = new RentingInstance(this, book);
+                RentedBooks.Add(renting);
                 book.Rent();
-                book.CurrentlyRentedBy.Add(this);
+                book.CurrentlyRentedBy.Add(renting);
             }
         }
 
@@ -49,9 +50,10 @@ namespace Library.ToniIvankovic.Contracts.Entities
                 throw new BookRentingException($"The book with the id {bookId} has not even been borrowed!");
             }
 
-            RentedBooks.Remove(RentedBooks.Find(r => r.Book == book));
+            RentingInstance? renting = RentedBooks.Find(r => r.Book == book);
+            RentedBooks.Remove(renting);
             book.Return();
-            book.CurrentlyRentedBy.Remove(this);
+            book.CurrentlyRentedBy.Remove(renting);
         }
     }
 }

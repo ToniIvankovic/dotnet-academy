@@ -38,7 +38,7 @@ namespace Library.ToniIvankovic.Data.Db.Configurations
                 .HasForeignKey<Address>(a => a.Id);
 
             builder
-                .HasMany<RentingInstance>()
+                .HasMany<RentingInstance>(p => p.RentedBooks)
                 .WithOne(r => r.Person);
         }
     }

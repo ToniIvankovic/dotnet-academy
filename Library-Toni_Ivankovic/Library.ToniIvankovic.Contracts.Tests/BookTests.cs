@@ -82,7 +82,7 @@ namespace Library.ToniIvankovic.Contracts.Tests
         public void Rent_WhenNotRented_ThenAddPersonToRentedList()
         {
             _person.RentBook(book);
-            Assert.Contains(_person, book.CurrentlyRentedBy);
+            Assert.Contains(_person, book.CurrentlyRentedBy.Select(r => r.Person));
         }
 
         [Fact]
@@ -90,7 +90,7 @@ namespace Library.ToniIvankovic.Contracts.Tests
         {
             _person.RentBook(book);
             _person.ReturnBook(book.Id);
-            Assert.DoesNotContain(_person, book.CurrentlyRentedBy);
+            Assert.DoesNotContain(_person, book.CurrentlyRentedBy.Select(r => r.Person));
         }
 
     }
