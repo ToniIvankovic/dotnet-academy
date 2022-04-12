@@ -10,5 +10,6 @@ namespace Library.ToniIvankovic.Contracts.Repositories
     public interface IPersonRepository : IRepository<Person>
     {
         Task<List<Person>> GetAllPersonsByCity(string city);
+        Task<IEnumerable<Person>> GetPeopleWithBookRentedBeforeDate(DateTime date);
     }
 }

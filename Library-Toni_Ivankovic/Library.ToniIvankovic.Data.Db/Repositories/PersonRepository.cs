@@ -39,5 +39,12 @@ namespace Library.ToniIvankovic.Data.Db.Repositories
                 .Include(p => p.RentedBooks)
                 .ToListAsync();
         }
+
+        public async Task<IEnumerable<Person>> GetPeopleWithBookRentedBeforeDate(DateTime date)
+        {
+            return await _dbSet
+                .Include(p => p.RentedBooks.Where(r => r.RentingDateTime < date))
+                .ToListAsync();
+        }
     }
 }
