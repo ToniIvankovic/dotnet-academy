@@ -20,6 +20,8 @@ namespace Library.ToniIvankovic.Services
         }
         public async Task Send(string to, string subject, string body)
         {
+            Console.WriteLine("Jel ispod mene key?\n");
+            Console.WriteLine(_settings.Key, _settings.From);
             var sendGridClient = new SendGridClient(_settings.Key);
             var message = new SendGridMessage
             {

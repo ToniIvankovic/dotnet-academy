@@ -21,20 +21,23 @@ namespace Library.ToniIvankovic.Services
 
         public async Task SendReturnBookNotification()
         {
+            Console.WriteLine("Poceo sendReturnBookNotif");
             const int days = 30;
             IEnumerable<Person> peopleWithUnreturnedBooks =
                 await _uow
                 .People
                 .GetPeopleWithBookRentedBeforeDate(DateTime.UtcNow.AddDays(days));
+            Console.WriteLine("Dobio ljude");
             foreach (Person person in peopleWithUnreturnedBooks)
             {
+                Console.WriteLine(person.Email);
                 await _emailService
                     .Send(person.Email,
                     "Books not returned"
                     , $"Hello, you have rented books which have not yet been returned, and the maximum limit of {days} days has passed. " +
                     $"\nPlease return it in shortest notice. Thank you.");
             }
-            throw new NotImplementedException();
+            Console.WriteLine("Zavrsio sendReturnBookNotif");
         }
     }
 }

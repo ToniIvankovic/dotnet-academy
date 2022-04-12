@@ -19,9 +19,8 @@ namespace FunctionEmailSender
         }
 
         [FunctionName("BookRentingReminder")]
-        public async Task Run([TimerTrigger("*/5 * * * * *")] TimerInfo myTimer)
+        public async Task Run([TimerTrigger("*/15 * * * * *")] TimerInfo myTimer)
         {
-            Console.WriteLine("Hej");
             try
             {
                 await _service.SendReturnBookNotification();
@@ -31,12 +30,6 @@ namespace FunctionEmailSender
                 _logger.LogError($"Timer trigger function executed with error: {ex.Message}");
                 throw;
             }
-        }
-
-        [FunctionName("LoggerFunction")]
-        public void RunLogging([TimerTrigger("* * * * * *")] TimerInfo myTimer)
-        {
-            _logger.LogInformation($"{DateTime.UtcNow}");
         }
     }
 }
