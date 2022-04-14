@@ -13,6 +13,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Options;
 
 [assembly: FunctionsStartup(typeof(Library.ToniIvankovic.Functions.Startup))]
 namespace Library.ToniIvankovic.Functions
@@ -24,24 +25,18 @@ namespace Library.ToniIvankovic.Functions
         {
             var services = builder.Services;
 
-            var sp = builder.Services.BuildServiceProvider();
-            config = sp.GetRequiredService<IConfiguration>();
+            config = builder.GetContext().Configuration;
 
-            //Console.WriteLine("v");
-            //config.AsEnumerable().ToList().ForEach(i => Console.WriteLine(i));
-            //Console.WriteLine(config.GetConnectionString("Key"));
-            //Console.WriteLine(System.Environment.GetEnvironmentVariable("Key"));
-            //Console.WriteLine(config.GetSection("EmailSettings").Key);
-            //Console.WriteLine(config.GetConnectionString("LibraryDB"));
+            services.AddOptions<EmailSettings>().Configure<IConfiguration>((settings, configuration) =>
+            {
+                configuration.GetSection("EmailSettings").Bind(settings);
+            });
+            //services.Configure<EmailSettings>(config.GetSection("EmailSettings"));  // Ne radi ni ovak
 
             services.AddDbContext<ApplicationDbContext>(opt => opt.UseSqlServer(config.GetConnectionString("LibraryDB")));
             services.AddScoped<ILibraryNotificationService, LibraryNotificationService>();
             services.AddScoped<IEmailService, EmailService>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
-            //services.Configure<EmailSettings>(new {
-            //    Key = config.GetConnectionString("Key"),
-            //    From = config.GetConnectionString("From")
-            //});
         }
     }
 }

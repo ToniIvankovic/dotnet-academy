@@ -13,8 +13,12 @@ namespace Library.ToniIvankovic.Contracts.Dtos
 
         public EmailSettings()
         {
-            Key = "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";
-            From = "student@academy.byinfinum.co";
+        }
+
+        public EmailSettings(string k, string f)
+        {
+            Key = k;
+            From = f;
         }
     }
 }
