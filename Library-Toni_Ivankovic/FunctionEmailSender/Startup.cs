@@ -20,14 +20,12 @@ namespace Library.ToniIvankovic.Functions
 {
     public class Startup : FunctionsStartup
     {
-        private static IConfiguration config = default!;
         public override void Configure(IFunctionsHostBuilder builder)
         {
             var services = builder.Services;
 
-            config = builder.GetContext().Configuration;
-
-            services.AddOptions<EmailSettings>().Configure<IConfiguration>((settings, configuration) =>
+            IConfiguration config = builder.GetContext().Configuration;
+            builder.Services.AddOptions<EmailSettings>().Configure<IConfiguration>((settings, configuration) =>
             {
                 configuration.GetSection("EmailSettings").Bind(settings);
             });
