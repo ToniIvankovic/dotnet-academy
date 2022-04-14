@@ -19,7 +19,7 @@ namespace FunctionEmailSender
         }
 
         [FunctionName("BookRentingReminder")]
-        public async Task Run([TimerTrigger("*/15 * * * * *")] TimerInfo myTimer)
+        public async Task Run([TimerTrigger("0 0 9 * * *")] TimerInfo myTimer)
         {
             try
             {

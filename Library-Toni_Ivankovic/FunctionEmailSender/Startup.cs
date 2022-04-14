@@ -24,12 +24,18 @@ namespace Library.ToniIvankovic.Functions
         {
             var services = builder.Services;
 
-            IConfiguration config = builder.GetContext().Configuration;
-            builder.Services.AddOptions<EmailSettings>().Configure<IConfiguration>((settings, configuration) =>
-            {
-                configuration.GetSection("EmailSettings").Bind(settings);
-            });
-            //services.Configure<EmailSettings>(config.GetSection("EmailSettings"));  // Ne radi ni ovak
+            //IConfiguration config = builder.GetContext().Configuration;
+            IConfiguration config = new ConfigurationBuilder()
+               .SetBasePath(Directory.GetCurrentDirectory())
+               .AddEnvironmentVariables()
+               .AddJsonFile("local.settings.json", optional: true, reloadOnChange: true)
+               .Build();
+
+            //builder.Services.AddOptions<EmailSettings>().Configure<IConfiguration>((settings, configuration) =>
+            //{
+            //    configuration.GetSection("EmailSettings").Bind(settings);
+            //});
+            services.Configure<EmailSettings>(config.GetSection("EmailSettings"));  // Ne radi ni ovak
 
             services.AddDbContext<ApplicationDbContext>(opt => opt.UseSqlServer(config.GetConnectionString("LibraryDB")));
             services.AddScoped<ILibraryNotificationService, LibraryNotificationService>();
