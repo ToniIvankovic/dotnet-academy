@@ -87,8 +87,8 @@ namespace Library.ToniIvankovic.Services.Tests
                 .Returns(Task.FromResult<Person?>(person));
 
             await _sut.RentBookAsync(person.Id, book.Id);
-            Assert.Contains(book, person.RentedBooks);
-            Assert.Contains(person, book.CurrentlyRentedBy);
+            Assert.Contains(book, person.RentedBooks.Select(r => r.Book));
+            Assert.Contains(person, book.CurrentlyRentedBy.Select(r => r.Person));
         }
 
         [Fact]

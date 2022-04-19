@@ -35,7 +35,7 @@ namespace Library.ToniIvankovic.Services
                 throw new EntityNotFoundException($"Unknown person with id {personId}!");
             }
 
-            return person.RentedBooks.Select(b => b.ToCatalogDTO()).ToList();
+            return person.RentedBooks.Select(b => b.Book.ToCatalogDTO()).ToList();
         }
 
         public async Task<BookCatalogDTO?> GetBookByIdAsync(int id)

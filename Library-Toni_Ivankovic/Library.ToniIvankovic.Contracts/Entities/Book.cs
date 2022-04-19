@@ -15,7 +15,7 @@ namespace Library.ToniIvankovic.Contracts.Entities
         public string Authors { get; }
         public Genre Genre { get; }
         public int Quantity { get; private set; }
-        public List<Person> CurrentlyRentedBy { get; }
+        public List<RentingInstance> CurrentlyRentedBy { get; }
 
         public Book(int id, string title, string authors, Genre genre, int quantity)
         {
@@ -24,7 +24,7 @@ namespace Library.ToniIvankovic.Contracts.Entities
             Authors = authors;
             Genre = genre;
             Quantity = quantity;
-            CurrentlyRentedBy = new List<Person>();
+            CurrentlyRentedBy = new List<RentingInstance>();
         }
 
         public bool IsAvailable() => Quantity > 0;
@@ -39,6 +39,7 @@ namespace Library.ToniIvankovic.Contracts.Entities
                 Quantity--;
             }
         }
+
         public void Return()
         {
             Quantity++;

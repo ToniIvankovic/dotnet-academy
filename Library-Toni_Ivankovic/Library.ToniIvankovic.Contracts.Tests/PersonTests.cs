@@ -64,7 +64,7 @@ namespace Library.ToniIvankovic.Contracts.Tests
         public void RentBook_WhenNotRented_ThenPutIntoList()
         {
             person.RentBook(_book);
-            Assert.Contains(_book, person.RentedBooks);
+            Assert.Contains(_book, person.RentedBooks.Select(r => r.Book));
         }
 
         [Fact]
@@ -72,14 +72,14 @@ namespace Library.ToniIvankovic.Contracts.Tests
         {
             person.RentBook(_book);
             person.ReturnBook(_book.Id);
-            Assert.DoesNotContain(_book, person.RentedBooks);
+            Assert.DoesNotContain(_book, person.RentedBooks.Select(r => r.Book));
         }
 
         [Fact]
         public void RentBook_WhenNotRented_ThenAddBookToRentedList()
         {
             person.RentBook(_book);
-            Assert.Contains(_book, person.RentedBooks);
+            Assert.Contains(_book, person.RentedBooks.Select(r => r.Book));
         }
 
         [Fact]
@@ -87,7 +87,7 @@ namespace Library.ToniIvankovic.Contracts.Tests
         {
             person.RentBook(_book);
             person.ReturnBook(_book.Id);
-            Assert.DoesNotContain(_book, person.RentedBooks);
+            Assert.DoesNotContain(_book, person.RentedBooks.Select(r => r.Book));
         }
     }
 }
